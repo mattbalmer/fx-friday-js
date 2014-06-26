@@ -1,7 +1,17 @@
-import { Sample } from '../src/sample.js'
+import { occursIn } from '../src/occursIn.js'
 
-describe('sample', function() {
-    it('Sample.foo == bar', function() {
-        expect(Sample.foo).toEqual('bar');
+describe('occursIn', function() {
+    var haystack = [ 1, 2, 4 ];
+
+    it('does not occur', function() {
+        var result = occursIn(3, haystack);
+
+        expect(result).toBe(false);
+    });
+
+    it('does occur', function() {
+        var result = occursIn(2, haystack);
+
+        expect(result).toBe(true);
     })
 });
