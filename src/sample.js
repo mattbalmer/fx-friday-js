@@ -1,5 +1,5 @@
-Sample = (function() {
-    return {
-        foo: 'bar'
-    }
-}());
+var Sample = {
+    foo: 'bar'
+};
+
+export { Sample }

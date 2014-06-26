@@ -4,6 +4,8 @@
   "devDependencies": {
     "karma": "^0.12.16",
     "karma-chrome-launcher": "^0.1.4",
-    "karma-jasmine": "^0.1.5"
+    "karma-jasmine": "^0.1.5",
+      "karma-requirejs": "~0.2.1",
+      "karma-traceur-preprocessor": "~0.1"
   }
 }
