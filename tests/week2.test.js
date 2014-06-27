@@ -3,6 +3,7 @@ import { allOccursIn } from '../src/allOccursIn.js'
 import { sameElements } from '../src/sameElements.js'
 import { numOccurrences } from '../src/numOccurrences.js'
 import { toSet } from '../src/toSet.js'
+import { toVersionArr, compareVersions } from '../src/versions.js'
 var haystack;
 
 describe('week 2', function() {
@@ -92,5 +93,102 @@ describe('week 2', function() {
 
             expect( toSet(list) ).toEqual(set);
         });
+    });
+
+    describe('toVersionArr', function() {
+        it('1.1.1', function() {
+            var v = '1.1.1';
+
+            expect( toVersionArr(v) ).toEqual( [1,1,1] );
+        });
+
+        it('1.1', function() {
+            var v = '1.1';
+
+            expect( toVersionArr(v) ).toEqual( [1,1,0] );
+        });
+
+        it('1', function() {
+            var v = '1';
+
+            expect( toVersionArr(v) ).toEqual( [1,0,0] );
+        });
+
+        it('1.12.14', function() {
+            var v = '1.12.14';
+
+            expect( toVersionArr(v) ).toEqual( [1,12,14] );
+        });
+    });
+
+    describe('compareVersions', function() {
+        describe('a > b', function() {
+            it('3 - 3', function() {
+                var a = '0.1.1',
+                    b = '0.1.0';
+
+                expect( compareVersions(a, b) ).toBe(1);
+            });
+
+            it('2 - 3', function() {
+                var a = '0.1.1',
+                    b = '0.1';
+
+                expect( compareVersions(a, b) ).toBe(1);
+            });
+
+            it('1 - 3', function() {
+                var a = '1.1.1',
+                    b = '1';
+
+                expect( compareVersions(a, b) ).toBe(1);
+            });
+        });
+
+        describe('a < b', function() {
+            it('3 - 3', function() {
+                var a = '0.0.9',
+                    b = '0.1.0';
+
+                expect( compareVersions(a, b) ).toBe(-1);
+            });
+
+            it('2 - 3', function() {
+                var a = '0.1',
+                    b = '0.1.1';
+
+                expect( compareVersions(a, b) ).toBe(-1);
+            });
+
+            it('1 - 3', function() {
+                var a = '1',
+                    b = '1.1.1';
+
+                expect( compareVersions(a, b) ).toBe(-1);
+            });
+        });
+
+        describe('a == b', function() {
+            it('3 - 3', function() {
+                var a = '0.1.1',
+                    b = '0.1.1';
+
+                expect( compareVersions(a, b) ).toBe(0);
+            });
+
+            it('2 - 3', function() {
+                var a = '0.1',
+                    b = '0.1.0';
+
+                expect( compareVersions(a, b) ).toBe(0);
+            });
+
+            it('1 - 3', function() {
+                var a = '1',
+                    b = '1.0.0';
+
+                expect( compareVersions(a, b) ).toBe(0);
+            });
+        })
     });
 });
