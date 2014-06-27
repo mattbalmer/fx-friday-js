@@ -1,5 +1,4 @@
 export function toVersionArr(v) {
-
     if(Array.isArray(v)) {
         if(v.length == 3)
             return v;
@@ -8,17 +7,14 @@ export function toVersionArr(v) {
         return toVersionArr(v);
     }
 
-    return toVersionArr( v.split(/\./g)).map(function(d){
+    return toVersionArr( v.split(/\./g) ).map(function(d){
         return parseInt(d);
     });
-
 }
 
-export function compareVersions(a, b, aI, bI) {
+export function compareVersions(a, b, aI = 0, bI = 0) {
     a = toVersionArr(a);
     b = toVersionArr(b);
-    aI = (aI || 0);
-    bI = (bI || 0);
 
     if(aI >= a.length || bI >= b.length )
         return 0;

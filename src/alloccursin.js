@@ -1,6 +1,4 @@
-export function allOccursIn(listA, listB, bI) {
-    bI = bI || 0;
-
+export function allOccursIn(listA, listB, bI = 0) {
     if(listA.length < 1)
         return true;
 

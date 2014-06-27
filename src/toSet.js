@@ -1,8 +1,6 @@
 import { occursIn } from './occursIn.js'
 
-export function toSet(list, newSet) {
-    newSet = newSet || [];
-
+export function toSet(list, newSet = []) {
     if(list.length < 1)
         return newSet;
 

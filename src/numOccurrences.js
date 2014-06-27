@@ -1,6 +1,4 @@
-export function numOccurrences(needle, haystack, count) {
-    count = count || 0;
-
+export function numOccurrences(needle, haystack, count = 0) {
     if(haystack.length < 1)
         return count;
 
