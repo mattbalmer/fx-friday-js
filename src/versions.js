@@ -1,29 +1,29 @@
-export function toVersionArr(v) {
-    if(Array.isArray(v)) {
-        if(v.length == 3)
-            return v;
+Array.prototype.fill = function(val, len) {
+    var a = Array.apply(null, new Array(len)).map(Number.prototype.valueOf, val)
+        , s = this;
 
-        v.push(0);
-        return toVersionArr(v);
-    }
-
-    return toVersionArr( v.split(/\./g) ).map(function(d){
-        return parseInt(d);
+    return a.map(function(v, i) {
+        return s[i] || val;
     });
+};
+
+function compareNum(a, b) {
+    return a < b ? -1 : a > b ? 1 : 0;
 }
 
-export function compareVersions(a, b, aI = 0, bI = 0) {
+function toVersionArr(v) {
+    return v.split(/\./g).map(Number).fill(0, 3);
+}
+
+function compareVersions(a, b) {
     a = toVersionArr(a);
     b = toVersionArr(b);
 
-    if(aI >= a.length || bI >= b.length )
-        return 0;
-
-    if(a[aI] == b[bI])
-        return compareVersions(a, b, ++aI, ++bI);
-
-    if(a[aI] < b[bI])
-        return -1;
-    else
-        return 1;
+    return a.map(function(e, i) {
+        return compareNum(a[i], b[i]);
+    }).reduce(function(prev, curr) {
+        return prev == 0 ? curr : prev;
+    });
 }
+
+export { toVersionArr, compareVersions }

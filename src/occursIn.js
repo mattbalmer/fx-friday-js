@@ -1,9 +1,9 @@
 export function occursIn(needle, haystack) {
-    if(haystack.length < 1)
-        return false;
-
-    if(haystack[0] == needle)
-        return true;
-
-    return occursIn(needle, haystack.slice(1))
+    return haystack.filter(function(elem) {
+        return elem == needle;
+    }).length > 0;
 }
+
+Number.prototype.occursIn = function(array) {
+    return occursIn.call(this, this, array);
+};
